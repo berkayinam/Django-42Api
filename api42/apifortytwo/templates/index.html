@@ -1,0 +1,32 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Users</title>
+</head>
+<body>
+    <h1>User Search</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if search_results %}
+    <h2>Results:</h2>
+    <ul>
+        {% for user in search_results %}
+            <li>
+                {{ user.first_name }} {{ user.last_name }} - {{ user.login }}<br>
+                Evo Points: {{ user.correction_point }}<br>
+                Wallet: {{ user.wallet }}<br>
+                Pool Date: {{ user.pool_month }} {{ user.pool_year }}<br>
+                <img src="{{ user.image.link }}" alt="User Image">
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+</body>
+</html>
